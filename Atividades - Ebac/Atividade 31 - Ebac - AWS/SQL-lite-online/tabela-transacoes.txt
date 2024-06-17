@@ -1,0 +1,21 @@
+CREATE TABLE transacoes (
+  id_cliente INTEGER,   
+  id_transacao INTEGER PRIMARY KEY,
+  data_compra DATE UNIQUE,
+  valor FLOAT NOT NULL, 
+  id_loja varchar(25),
+  FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+  CHECK (valor > 0)
+  );
+  
+INSERT INTO transacoes VALUES (1,768805383,2021-06-10,50.74,'magalu');
+INSERT INTO transacoes VALUES (2,768805399,2021-06-13,30.90,'giraffas');
+INSERT INTO transacoes VALUES (3,818770008,2021-06-05,110.00,'postoshell');
+INSERT INTO transacoes VALUES (1,76856563,2021-07-10,2000.90,'magalu');
+INSERT INTO transacoes VALUES (1,767573759,2021-06-20,15.70,'subway');
+INSERT INTO transacoes VALUES (3,818575758,2021-06-25,2.99,'seveneleven');
+INSERT INTO transacoes VALUES (4,764545534,2021-07-11,50.74,'extra');
+INSERT INTO transacoes VALUES (5,76766789,2021-08-02,10.00,'subway');
+INSERT INTO transacoes VALUES (3,8154567758,2021-08-15,1100.00,'shopee');
+
+SELECT * FROM transacoes;

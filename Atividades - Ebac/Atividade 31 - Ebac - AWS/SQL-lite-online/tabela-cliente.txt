@@ -1,0 +1,12 @@
+CREATE TABLE clientes(
+  
+	id_cliente INTEGER PRIMARY KEY AUTOINCREMENT
+);
+
+INSERT INTO clientes VALUES(1);
+INSERT INTO clientes VALUES(2);
+INSERT INTO clientes VALUES(3);
+INSERT INTO clientes VALUES(4);
+INSERT INTO clientes VALUES(5);
+
+SELECT * FROM clientes;
