@@ -1,0 +1,25 @@
+SELECT * FROM heartattack limit 10;
+
+SELECT COUNT(age) AS QUANTIDADE_LINHAS
+FROM heartattack
+
+SELECT COUNT(age) AS QUANTIDADE, 
+CASE
+WHEN output =1 THEN ' more chance of heart attack'
+ELSE 'less chance of heart attack'
+END AS output
+FROM heartattack
+GROUP BY output;
+
+SELECT MAX(age), MIN(age), AVG(age), output  
+FROM heartattack
+GROUP BY output
+
+SELECT MAX(age), MIN(age), AVG(age), output ,sex
+FROM heartattack
+GROUP BY output, sex;
+
+SELECT COUNT(output), output, sex 
+FROM heartattack
+GROUP BY output, sex
+having COUNT(output) > 25
