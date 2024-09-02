@@ -1,0 +1,46 @@
+QUERY_1
+
+SELECT id_loja, id_cliente, id_transacao from transacoes 
+WHERE id_loja IN
+(SELECT cliente.loja_cadastro from cliente where cliente.valor_compra > 160 )
+
+
+QUERY_2
+
+SELECT * FROM transacoes_part where id_loja = 'magalu'
+
+QUERY_3
+
+CREATE VIEW  transacoesv100 AS
+SELECT id_cliente , valor_compra, id_loja AS nome_loja FROM transacoes where valor_compra > 100
+
+select * from transacoesv100
+
+QUERY_4
+
+CREATE VIEW clientevalor  AS 
+SELECT id_cliente, valor_compra FROM transacoes ORDER BY valor_compra DESC LIMIT 2;
+
+SELECT * from clientevalor
+
+BONUS
+
+/*Faz descrição da tabela igual a do python com o pandas*/
+describe clientevalor
+
+/*Mostra o nome das colunas e seus tipos*/
+show columns in clientevalor
+
+/*Mostra o nome das visualizações criadas*/
+show views
+
+/*Mostra a criação da visualização da tabela em questão
+Obs: Mostra o código de criação da tabela, funciona apenas
+para tabelas existentes*/
+
+show create view clientevalor
+show create view transacoesv100
+
+/*Dropa a tabela que serve apenas para visualização*/
+
+drop view clientevalor 
