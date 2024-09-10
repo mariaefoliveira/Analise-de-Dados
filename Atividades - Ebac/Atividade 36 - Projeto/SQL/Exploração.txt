@@ -1,0 +1,34 @@
+EXPLORAÇÃO
+
+/*Dados da tabela limitado a 10 itens*/
+SELECT * from credito_filtrado limit 10;
+
+/*Quantidade de linhas/dados registrados*/
+SELECT count(*) from credito_filtrado;
+
+/*Tipo do dado*/
+DESCRIBE credito;
+
+/*Escolaridade registradas na tabela*/
+SELECT DISTINCT escolaridade FROM credito_filtrado;
+
+/*Qual a idade média dos clientes?*/
+SELECT CAST(AVG(idade) AS INT) AS idade_media FROM credito_filtrado;
+
+/*Qual é o sexo predominante entre os clientes?*/
+SELECT sexo, COUNT(*) AS total_cliente FROM credito_filtrado GROUP BY sexo ORDER BY total_cliente DESC;
+
+/*Qual o nível de escolaridade mais comum?*/
+
+SELECT escolaridade, COUNT(*) AS total_cliente FROM credito_filtrado 
+GROUP BY escolaridade ORDER BY total_cliente DESC;
+
+/*Qual a distribuição dos clientes por faixa salarial?*/
+
+SELECT salario_anual, COUNT(*) AS total_cliente FROM credito_filtrado
+GROUP BY salario_anual ORDER BY total_cliente DESC;
+
+/*Qual a distribuição dos clientes por estado civil?*/
+
+SELECT estado_civil, COUNT(*) AS total_cliente FROM credito_filtrado
+GROUP BY estado_civil ORDER BY total_cliente DESC;

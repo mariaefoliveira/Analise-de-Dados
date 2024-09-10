@@ -1,0 +1,34 @@
+/*Uso do cartão*/
+
+/*Média de trasações totais*/
+SELECT CAST(AVG(valor_transacoes_12m / gtd_transacoes_12m) AS INT) AS media_de_transacoes FROM credito_filtrado;
+
+/*Média de transações por tipo de cartão*/
+SELECT tipo_cartao, CAST(AVG(valor_transacoes_12m / gtd_transacoes_12m) AS INT) AS valor_medio_transacao FROM credito_filtrado GROUP BY tipo_cartao ORDER BY valor_medio_transacao DESC;
+
+/*Média de transações por sexo*/
+
+SELECT sexo, CAST(AVG(valor_transacoes_12m / gtd_transacoes_12m) AS INT) AS valor_medio_transacao FROM credito_filtrado GROUP BY sexo ORDER BY valor_medio_transacao DESC;
+
+/*Média de transações por idade*/
+SELECT
+  faixa_etaria,
+  AVG(valor_transacoes_12m) AS valor_medio_transacao
+FROM (
+  SELECT
+    *,
+    CASE
+      WHEN idade BETWEEN 26 AND 35 THEN '26-35'
+      WHEN idade BETWEEN 36 AND 45 THEN '36-45'
+      WHEN idade BETWEEN 46 AND 55 THEN '46-55'
+      WHEN idade BETWEEN 56 AND 65 THEN '56-65'
+      WHEN idade BETWEEN 66 AND 73 THEN '66-73'
+    END AS faixa_etaria
+  FROM credito_filtrado
+  WHERE idade BETWEEN 26 AND 73
+) AS subquery
+GROUP BY faixa_etaria
+ORDER BY faixa_etaria;
+
+/*Qual a relação entre o limite de crédito e o valor das transações?*/
+

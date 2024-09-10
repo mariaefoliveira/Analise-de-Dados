@@ -1,0 +1,37 @@
+/*Análise comparativa*/
+
+/*Homens e mulheres usam cartões diferentes*/
+
+SELECT sexo, tipo_cartao, COUNT(*) AS tipo_cartao FROM credito_filtrado GROUP BY sexo;
+
+SELECT t.tipo_cartao,
+  MAX(CASE WHEN t.sexo = 'M' THEN quantidade END) AS masculino,
+  MAX(CASE WHEN t.sexo = 'F' THEN quantidade END) AS feminino
+FROM 
+  (
+    SELECT
+      sexo,
+      tipo_cartao,
+      COUNT(*) AS quantidade
+    FROM credito_filtrado
+    GROUP BY sexo, tipo_cartao
+  ) t
+GROUP BY
+  t.tipo_cartao;
+  
+  /*Homens e mulheres gastam quantias diferentes?*/
+  
+  SELECT
+  t.tipo_cartao,
+  AVG(CASE WHEN t.sexo = 'M' THEN valor_transacoes_12m END) AS gasto_medio_masculino,
+  AVG(CASE WHEN t.sexo = 'F' THEN valor_transacoes_12m END) AS gasto_medio_feminino
+FROM
+  (
+    SELECT
+      sexo,
+      tipo_cartao,
+      valor_transacoes_12m
+    FROM credito_filtrado
+  ) t
+GROUP BY
+  t.tipo_cartao;

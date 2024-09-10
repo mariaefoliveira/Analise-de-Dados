@@ -1,0 +1,34 @@
+CRIAÇÃO DE TABELA E LIMPEZA
+
+CREATE EXTERNAL TABLE IF NOT EXISTS default.credito (
+    idade int,
+    sexo string,
+    dependentes int,
+    escolaridade string,
+    estado_civil string,
+    salario_anual string,
+    tipo_cartao string,
+    qtd_produtos bigint,
+    iteracoes_12m int,
+    meses_inativo_12m int,
+    limite_credito float,
+    valor_transacoes_12m float,
+    qtd_transacoes_12m int
+)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ('field.delim' = ',') 
+STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://projeto-transacoes-mod-36/'
+TBLPROPERTIES ('classification' = 'csv');
+
+/*Visualizacao de alguns dados para checar se foi pego todas as colunas corretamente
+
+- Nota-se que há informações nulas, identificado por "na"*/
+
+SELECT * from credito limit 10;
+
+CREATE TABLE credito_filtrado AS SELECT * FROM credito 
+WHERE escolaridade != 'na' AND estado_civil != 'na' AND salario_anual != 'na';
+
+SELECT * FROM credito_filtrado limit 10;
